@@ -1,0 +1,1424 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AffiliateBoost - Earn Money Promoting Products</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://www.tiktok.com/embed.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#10B981',
+                        dark: '#1F2937',
+                        light: '#F9FAFB',
+                        airtel: '#E21836'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #4F46E5 0%, #10B981 100%);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .affiliate-stats {
+            background: rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Airtel payment styling */
+        .airtel-bg {
+            background-color: #E21836;
+        }
+        
+        .airtel-bg:hover {
+            background-color: #C0112D;
+        }
+        
+        .payment-option {
+            transition: all 0.3s ease;
+        }
+        
+        .payment-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Custom radio button styling */
+        .custom-radio {
+            display: none;
+        }
+        
+        .custom-radio + label {
+            position: relative;
+            padding-left: 35px;
+            cursor: pointer;
+            display: inline-block;
+            line-height: 24px;
+        }
+        
+        .custom-radio + label:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            background: #fff;
+        }
+        
+        .custom-radio:checked + label:before {
+            border-color: #4F46E5;
+        }
+        
+        .custom-radio:checked + label:after {
+            content: "";
+            position: absolute;
+            left: 7px;
+            top: 7px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4F46E5;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-rocket text-primary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-dark">AffiliateBoost</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="#" class="border-primary text-dark inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
+                        <a href="#products" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Products</a>
+                        <a href="#affiliates" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Affiliates</a>
+                        <a href="#about" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">About</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
+                    <button class="text-dark hover:text-primary px-3 py-2 rounded-md text-sm font-medium" id="login-btn">Login</button>
+                    <button class="bg-primary hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium" id="signup-btn">Sign Up</button>
+                    <button class="text-dark hover:text-primary px-3 py-2 rounded-md text-sm font-medium" id="affiliate-login-btn">Affiliate Login</button>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary" aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-button">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="sm:hidden hidden" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="#" class="bg-primary bg-opacity-10 border-primary text-dark block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
+                <a href="#products" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Products</a>
+                <a href="#affiliates" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Affiliates</a>
+                <a href="#about" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">About</a>
+                <div class="mt-4 pl-3 space-y-2">
+                    <button class="w-full text-left px-4 py-2 text-sm font-medium text-dark hover:bg-gray-100 rounded-md" id="mobile-login-btn">Login</button>
+                    <button class="w-full bg-primary hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium" id="mobile-signup-btn">Sign Up</button>
+                    <button class="w-full text-left px-4 py-2 text-sm font-medium text-dark hover:bg-gray-100 rounded-md" id="mobile-affiliate-login-btn">Affiliate Login</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="gradient-bg text-white">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                    Earn Money Promoting Top Products
+                </h1>
+                <p class="mt-6 max-w-lg mx-auto text-xl">
+                    Join our affiliate program and earn up to 30% commission on every sale you refer.
+                </p>
+                <div class="mt-10">
+                    <a href="#affiliates" class="pulse-animation inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-primary bg-white hover:bg-gray-100">
+                        Become an Affiliate
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="bg-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="affiliate-stats p-6 rounded-lg">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-primary bg-opacity-10 p-3 rounded-full">
+                            <i class="fas fa-users text-primary text-xl"></i>
+                        </div>
+                        <div class="ml-5">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Active Affiliates</dt>
+                                <dd class="flex items-baseline">
+                                    <p class="text-2xl font-semibold text-dark">12,345</p>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="affiliate-stats p-6 rounded-lg">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-secondary bg-opacity-10 p-3 rounded-full">
+                            <i class="fas fa-dollar-sign text-secondary text-xl"></i>
+                        </div>
+                        <div class="ml-5">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Total Payouts</dt>
+                                <dd class="flex items-baseline">
+                                    <p class="text-2xl font-semibold text-dark">$2.4M</p>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="affiliate-stats p-6 rounded-lg">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-primary bg-opacity-10 p-3 rounded-full">
+                            <i class="fas fa-box text-primary text-xl"></i>
+                        </div>
+                        <div class="ml-5">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Products</dt>
+                                <dd class="flex items-baseline">
+                                    <p class="text-2xl font-semibold text-dark">87</p>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="affiliate-stats p-6 rounded-lg">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-secondary bg-opacity-10 p-3 rounded-full">
+                            <i class="fas fa-percentage text-secondary text-xl"></i>
+                        </div>
+                        <div class="ml-5">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Avg. Commission</dt>
+                                <dd class="flex items-baseline">
+                                    <p class="text-2xl font-semibold text-dark">25%</p>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+    <div class="bg-gray-50 py-16" id="products">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-dark sm:text-4xl">
+                    Featured Products
+                </h2>
+                <p class="mt-4 max-w-xl mx-auto text-gray-500">
+                    Promote our top-selling products and earn generous commissions.
+                </p>
+            </div>
+
+            <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Product 1 -->
+                <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 ease-in-out">
+                    <div class="relative pb-48 overflow-hidden">
+                        <img class="absolute inset-0 h-full w-full object-cover" src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="Product image">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <span class="inline-flex px-2 py-1 text-xs font-semibold leading-4 text-secondary bg-secondary bg-opacity-10 rounded-full">Bestseller</span>
+                            <span class="ml-2 inline-flex px-2 py-1 text-xs font-semibold leading-4 text-primary bg-primary bg-opacity-10 rounded-full">30% Commission</span>
+                        </div>
+                        <h3 class="mt-2 font-semibold text-lg text-dark">Premium WordPress Theme</h3>
+                        <p class="mt-2 text-gray-600">Modern, responsive theme perfect for any business website.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-bold text-dark">$49</span>
+                            <button class="add-to-cart bg-primary hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium" data-product-id="1" data-product-name="Premium WordPress Theme" data-product-price="49">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 ease-in-out">
+                    <div class="relative pb-48 overflow-hidden">
+                        <img class="absolute inset-0 h-full w-full object-cover" src="https://images.unsplash.com/photo-1546868871-7041f2d55e12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="Product image">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <span class="inline-flex px-2 py-1 text-xs font-semibold leading-4 text-purple-500 bg-purple-500 bg-opacity-10 rounded-full">New</span>
+                            <span class="ml-2 inline-flex px-2 py-1 text-xs font-semibold leading-4 text-primary bg-primary bg-opacity-10 rounded-full">25% Commission</span>
+                        </div>
+                        <h3 class="mt-2 font-semibold text-lg text-dark">SEO Optimization Tool</h3>
+                        <p class="mt-2 text-gray-600">Comprehensive SEO software to boost your website rankings.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-bold text-dark">$99</span>
+                            <button class="add-to-cart bg-primary hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium" data-product-id="2" data-product-name="SEO Optimization Tool" data-product-price="99">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 ease-in-out">
+                    <div class="relative pb-48 overflow-hidden">
+                        <img class="absolute inset-0 h-full w-full object-cover" src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="Product image">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <span class="inline-flex px-2 py-1 text-xs font-semibold leading-4 text-secondary bg-secondary bg-opacity-10 rounded-full">Popular</span>
+                            <span class="ml-2 inline-flex px-2 py-1 text-xs font-semibold leading-4 text-primary bg-primary bg-opacity-10 rounded-full">20% Commission</span>
+                        </div>
+                        <h3 class="mt-2 font-semibold text-lg text-dark">Email Marketing Software</h3>
+                        <p class="mt-2 text-gray-600">Powerful email marketing platform with automation features.</p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-xl font-bold text-dark">$29/month</span>
+                            <button class="add-to-cart bg-primary hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium" data-product-id="3" data-product-name="Email Marketing Software" data-product-price="29">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-dark hover:bg-gray-800">
+                    View All Products
+                    <i class="fas fa-chevron-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Affiliate Program Section -->
+    <div class="bg-white py-16" id="affiliates">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-3xl font-extrabold text-dark sm:text-4xl">
+                    Affiliate Program
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Join thousands of affiliates earning commissions by promoting our products.
+                </p>
+            </div>
+
+            <div class="mt-20">
+                <div class="grid gap-10 lg:grid-cols-3 lg:gap-8">
+                    <div class="bg-gray-50 p-8 rounded-lg">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
+                            <i class="fas fa-link text-xl"></i>
+                        </div>
+                        <div class="mt-5">
+                            <h3 class="text-lg font-medium text-dark">Unique Links</h3>
+                            <p class="mt-2 text-gray-500">
+                                Get unique tracking links for every product to track your referrals.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-8 rounded-lg">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-secondary text-white">
+                            <i class="fas fa-chart-line text-xl"></i>
+                        </div>
+                        <div class="mt-5">
+                            <h3 class="text-lg font-medium text-dark">Real-time Stats</h3>
+                            <p class="mt-2 text-gray-500">
+                                Monitor clicks, conversions, and earnings in your dashboard.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-8 rounded-lg">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-purple-500 text-white">
+                            <i class="fas fa-money-bill-alt text-xl"></i>
+                        </div>
+                        <div class="mt-5">
+                            <h3 class="text-lg font-medium text-dark">Reliable Payouts</h3>
+                            <p class="mt-2 text-gray-500">
+                                Get paid monthly via PayPal, bank transfer, or Airtel Money.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-gradient-to-r from-primary to-secondary rounded-lg shadow-xl overflow-hidden">
+                <div class="px-6 py-12 sm:p-16">
+                    <div class="max-w-xl mx-auto lg:max-w-none lg:flex lg:items-center lg:justify-between">
+                        <div>
+                            <h2 class="text-3xl font-extrabold text-white">
+                                Ready to start earning?
+                            </h2>
+                            <p class="mt-4 text-lg text-indigo-100">
+                                Sign up for free and start promoting our products today.
+                            </p>
+                        </div>
+                        <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+                            <div class="inline-flex rounded-md shadow">
+                                <button class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-primary bg-white hover:bg-gray-50" id="join-now-btn">
+                                    Join Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TikTok Videos Section -->
+    <div class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-dark sm:text-4xl">
+                    Watch & Earn
+                </h2>
+                <p class="mt-4 max-w-xl mx-auto text-gray-500">
+                    Watch these trending videos and earn rewards!
+                </p>
+            </div>
+
+            <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Video 1 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow">
+                    <div class="relative pt-[177.78%]">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.tiktok.com/embed/v2/1234567890123456789" frameborder="0" allowfullscreen title="Trending Product Demo TikTok Video"></iframe>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium text-dark">Trending Product Demo</h3>
+                        <p class="mt-1 text-sm text-gray-500">Watch time: 30 sec</p>
+                        <button class="mt-3 w-full bg-primary hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                            Watch & Earn
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow">
+                    <div class="relative pt-[177.78%]">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.tiktok.com/embed/v2/9876543210987654321" frameborder="0" allowfullscreen title="Customer Review TikTok Video"></iframe>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium text-dark">Customer Review</h3>
+                        <p class="mt-1 text-sm text-gray-500">Watch time: 45 sec</p>
+                        <button class="mt-3 w-full bg-primary hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                            Watch & Earn
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow">
+                    <div class="relative pt-[177.78%]">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.tiktok.com/embed/v2/5678901234567890123" frameborder="0" allowfullscreen title="How To Use Guide TikTok Video"></iframe>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium text-dark">How To Use Guide</h3>
+                        <p class="mt-1 text-sm text-gray-500">Watch time: 1 min</p>
+                        <button class="mt-3 w-full bg-primary hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                            Watch & Earn
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-dark sm:text-4xl">
+                    What Our Affiliates Say
+                </h2>
+            </div>
+
+            <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-lg shadow">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/women/42.jpg" alt="Testimonial">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-dark">Sarah Johnson</h4>
+                            <p class="text-gray-500">Top Affiliate</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-600">
+                            "I've been with AffiliateBoost for 2 years and consistently earn $5,000+ per month. Their high-converting products and reliable tracking make it easy to scale my business."
+                        </p>
+                    </div>
+                    <div class="mt-4 flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-lg shadow">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Testimonial">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-dark">Michael Chen</h4>
+                            <p class="text-gray-500">Affiliate Marketer</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-600">
+                            "The real-time stats and marketing materials provided help me optimize my campaigns. I've doubled my conversion rate since joining."
+                        </p>
+                    </div>
+                    <div class="mt-4 flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-lg shadow">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/women/65.jpg" alt="Testimonial">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-dark">Jessica Williams</h4>
+                            <p class="text-gray-500">Blogger</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-600">
+                            "As a blogger, I appreciate the variety of products I can promote to my audience. The commissions are higher than other programs I've tried."
+                        </p>
+                    </div>
+                    <div class="mt-4 flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star-half-alt text-yellow-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div class="fixed inset-0 overflow-hidden z-50 hidden" id="cart-modal">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" id="cart-overlay"></div>
+            <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+                <div class="w-screen max-w-md">
+                    <div class="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
+                        <div class="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
+                            <div class="flex items-start justify-between">
+                                <h2 class="text-lg font-medium text-dark">Shopping cart</h2>
+                                <div class="ml-3 h-7 flex items-center">
+                                    <button type="button" class="-m-2 p-2 text-gray-400 hover:text-gray-500" id="close-cart">
+                                        <span class="sr-only">Close panel</span>
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="mt-8">
+                                <div class="flow-root">
+                                    <ul class="-my-6 divide-y divide-gray-200" id="cart-items">
+                                        <!-- Cart items will be added here dynamically -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-200 py-6 px-4 sm:px-6">
+                            <div class="flex justify-between text-base font-medium text-dark">
+                                <p>Subtotal</p>
+                                <p id="cart-total">$0.00</p>
+                            </div>
+                            <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+                            <div class="mt-6">
+                                <a href="#" class="flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-indigo-700" id="checkout-button">
+                                    Checkout
+                                </a>
+                            </div>
+                            <div class="mt-6 flex justify-center text-sm text-center text-gray-500">
+                                <p>
+                                    or <button type="button" class="text-primary font-medium hover:text-indigo-500" id="continue-shopping">Continue Shopping<span aria-hidden="true"> &rarr;</span></button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Form Modal -->
+    <div class="fixed inset-0 overflow-hidden z-50 hidden" id="checkout-modal">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" id="checkout-overlay"></div>
+            <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+                <div class="w-screen max-w-md">
+                    <div class="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
+                        <div class="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
+                            <div class="flex items-start justify-between">
+                                <h2 class="text-lg font-medium text-dark">Checkout</h2>
+                                <div class="ml-3 h-7 flex items-center">
+                                    <button type="button" class="-m-2 p-2 text-gray-400 hover:text-gray-500" id="close-checkout">
+                                        <span class="sr-only">Close panel</span>
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="mt-8">
+                                <form id="payment-form">
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                            <input type="email" id="email" name="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" required>
+                                        </div>
+                                        
+                                        <div>
+                                            <label for="card-number" class="block text-sm font-medium text-gray-700">Card number</label>
+                                            <input type="text" id="card-number" name="card-number" placeholder="4242 4242 4242 4242" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" required>
+                                        </div>
+                                        
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <label for="expiry" class="block text-sm font-medium text-gray-700">Expiry</label>
+                                                <input type="text" id="expiry" name="expiry" placeholder="MM/YY" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" required>
+                                            </div>
+                                            <div>
+                                                <label for="cvc" class="block text-sm font-medium text-gray-700">CVC</label>
+                                                <input type="text" id="cvc" name="cvc" placeholder="123" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <label for="name" class="block text-sm font-medium text-gray-700">Name on card</label>
+                                            <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" required>
+                                        </div>
+                                        
+                                        <div class="pt-4 border-t border-gray-200">
+                                            <div class="flex justify-between text-base font-medium text-dark">
+                                                <p>Total</p>
+                                                <p id="checkout-total">$0.00</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="space-y-3">
+                                            <button type="submit" class="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-indigo-700">
+                                                Pay with Card
+                                            </button>
+                                            <button type="button" id="use-airtel-payment" class="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white airtel-bg hover:bg-red-700">
+                                                <i class="fas fa-mobile-alt mr-2"></i> Pay with Airtel Money
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="fixed inset-0 overflow-hidden z-50 hidden" id="success-modal">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" id="success-overlay"></div>
+            <div class="fixed inset-0 flex items-center justify-center">
+                <div class="bg-white rounded-lg shadow-xl overflow-hidden max-w-md w-full">
+                    <div class="p-6 text-center">
+                        <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                            <i class="fas fa-check text-green-600"></i>
+                        </div>
+                        <h3 class="mt-3 text-lg font-medium text-dark">Payment successful!</h3>
+                        <div class="mt-2">
+                            <p class="text-sm text-gray-500">
+                                Your order has been processed. We've sent a confirmation email with your receipt.
+                            </p>
+                        </div>
+                        <div class="mt-6">
+                            <button type="button" class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary sm:text-sm" id="success-close">
+                                Continue shopping
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Affiliate Login Modal -->
+    <div class="fixed inset-0 overflow-hidden z-50 hidden" id="affiliate-login-modal">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" id="affiliate-login-overlay"></div>
+            <div class="fixed inset-0 flex items-center justify-center">
+                <div class="bg-white rounded-lg shadow-xl overflow-hidden max-w-md w-full">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between">
+                            <h3 class="text-lg font-medium text-dark">Affiliate Login</h3>
+                            <button type="button" class="text-gray-400 hover:text-gray-500" id="close-affiliate-login">
+                                <span class="sr-only">Close</span>
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <form id="affiliate-login-form">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label for="login-email" class="block text-sm font-medium text-gray-700">Email</label>
+                                        <input type="email" id="login-email" name="login-email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" required>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="login-password" class="block text-sm font-medium text-gray-700">Password</label>
+                                        <input type="password" id="login-password" name="login-password" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" required>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+                                            <label for="remember-me" class="ml-2 block text-sm text-gray-700">Remember me</label>
+                                        </div>
+                                        
+                                        <div class="text-sm">
+                                            <a href="#" class="font-medium text-primary hover:text-indigo-500">Forgot your password?</a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <button type="submit" class="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-indigo-700">
+                                            Sign in
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                            <div class="mt-6">
+                                <div class="relative">
+                                    <div class="absolute inset-0 flex items-center">
+                                        <div class="w-full border-t border-gray-300"></div>
+                                    </div>
+                                    <div class="relative flex justify-center text-sm">
+                                        <span class="px-2 bg-white text-gray-500">Or continue with</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-6 grid grid-cols-2 gap-3">
+                                    <div>
+                                        <a href="#" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <i class="fab fa-google text-red-500"></i>
+                                            <span class="ml-2">Google</span>
+                                        </a>
+                                    </div>
+                                    
+                                    <div>
+                                        <a href="#" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <i class="fab fa-facebook-f text-blue-600"></i>
+                                            <span class="ml-2">Facebook</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 text-center">
+                                <p class="text-sm text-gray-500">
+                                    Don't have an account? 
+                                    <button class="font-medium text-primary hover:text-indigo-500" id="show-affiliate-signup">
+                                        Sign up
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Affiliate Signup Modal -->
+    <div class="fixed inset-0 overflow-hidden z-50 hidden" id="affiliate-signup-modal">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" id="affiliate-signup-overlay"></div>
+            <div class="fixed inset-0 flex items-center justify-center">
+                <div class="bg-white rounded-lg shadow-xl overflow-hidden max-w-md w-full">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between">
+                            <h3 class="text-lg font-medium text-dark">Join Our Affiliate Program</h3>
+                            <button type="button" class="text-gray-400 hover:text-gray-500" id="close-affiliate-signup">
+                                <span class="sr-only">Close</span>
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <form id="affiliate-signup-form">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label for="signup-name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                                        <input type="text" id="signup-name" name="signup-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" required>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="signup-email" class="block text-sm font-medium text-gray-700">Email</label>
+                                        <input type="email" id="signup-email" name="signup-email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" required>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="signup-password" class="block text-sm font-medium text-gray-700">Password</label>
+                                        <input type="password" id="signup-password" name="signup-password" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" required>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="signup-website" class="block text-sm font-medium text-gray-700">Website or Social Media (optional)</label>
+                                        <input type="url" id="signup-website" name="signup-website" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="signup-promotion" class="block text-sm font-medium text-gray-700">How will you promote our products?</label>
+                                        <select id="signup-promotion" name="signup-promotion" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
+                                            <option value="">Select an option</option>
+                                            <option value="website">Website/Blog</option>
+                                            <option value="social">Social Media</option>
+                                            <option value="email">Email Marketing</option>
+                                            <option value="youtube">YouTube</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="pt-4">
+                                        <h4 class="text-sm font-medium text-gray-700 mb-2">Payment Method for Commissions</h4>
+                                        <div class="space-y-3">
+                                            <div class="payment-option bg-gray-50 p-4 rounded-lg">
+                                                <input type="radio" id="paypal" name="payment-method" value="paypal" class="custom-radio" checked>
+                                                <label for="paypal" class="flex items-center">
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="h-6 ml-2">
+                                                </label>
+                                            </div>
+                                            
+                                            <div class="payment-option bg-gray-50 p-4 rounded-lg">
+                                                <input type="radio" id="bank-transfer" name="payment-method" value="bank-transfer" class="custom-radio">
+                                                <label for="bank-transfer" class="flex items-center">
+                                                    <i class="fas fa-university text-gray-700 ml-2"></i>
+                                                    <span class="ml-2">Bank Transfer</span>
+                                                </label>
+                                            </div>
+                                            
+                                            <div class="payment-option bg-gray-50 p-4 rounded-lg">
+                                                <input type="radio" id="airtel-money" name="payment-method" value="airtel-money" class="custom-radio">
+                                                <label for="airtel-money" class="flex items-center">
+                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Airtel_Money_Logo.svg/1200px-Airtel_Money_Logo.svg.png" alt="Airtel Money" class="h-6 ml-2">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Airtel Money Payment Fields (hidden by default) -->
+                                    <div id="airtel-fields" class="hidden space-y-3">
+                                        <div>
+                                            <label for="airtel-phone" class="block text-sm font-medium text-gray-700">Airtel Money Phone Number</label>
+                                            <input type="tel" id="airtel-phone" name="airtel-phone" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" placeholder="e.g. 256XXXXXXXXX">
+                                        </div>
+                                        
+                                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                                            <div class="flex">
+                                                <div class="flex-shrink-0">
+                                                    <i class="fas fa-info-circle text-yellow-400"></i>
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="text-sm text-yellow-700">
+                                                        You'll need to verify your Airtel Money account before receiving payments.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="flex items-center h-5">
+                                            <input id="terms" name="terms" type="checkbox" class="focus:ring-primary h-4 w-4 text-primary border-gray-300 rounded" required>
+                                        </div>
+                                        <div class="ml-3 text-sm">
+                                            <label for="terms" class="font-medium text-gray-700">I agree to the <a href="#" class="text-primary hover:text-indigo-500">Terms & Conditions</a> and <a href="#" class="text-primary hover:text-indigo-500">Privacy Policy</a></label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <button type="submit" class="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-indigo-700">
+                                            Join Affiliate Program
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                            <div class="mt-6 text-center">
+                                <p class="text-sm text-gray-500">
+                                    Already have an account? 
+                                    <button class="font-medium text-primary hover:text-indigo-500" id="show-affiliate-login">
+                                        Sign in
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Airtel Payment Modal -->
+    <div class="fixed inset-0 overflow-hidden z-50 hidden" id="airtel-payment-modal">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" id="airtel-payment-overlay"></div>
+            <div class="fixed inset-0 flex items-center justify-center">
+                <div class="bg-white rounded-lg shadow-xl overflow-hidden max-w-md w-full">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between">
+                            <h3 class="text-lg font-medium text-dark">Pay with Airtel Money</h3>
+                            <button type="button" class="text-gray-400 hover:text-gray-500" id="close-airtel-payment">
+                                <span class="sr-only">Close</span>
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <div class="flex justify-center mb-6">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Airtel_Money_Logo.svg/1200pox-Airtel_Money_Logo.svg.png" alt="Airtel Money" class="h-16">
+                            </div>
+                            
+                            <form id="airtel-payment-form">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label for="airtel-payment-phone" class="block text-sm font-medium text-gray-700">Airtel Money Phone Number</label>
+                                        <input type="tel" id="airtel-payment-phone" name="airtel-payment-phone" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" placeholder="e.g. 256XXXXXXXXX" required>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="airtel-payment-amount" class="block text-sm font-medium text-gray-700">Amount</label>
+                                        <div class="mt-1 relative rounded-md shadow-sm">
+                                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <span class="text-gray-500 sm:text-sm">$</span>
+                                            </div>
+                                            <input type="text" id="airtel-payment-amount" name="airtel-payment-amount" class="focus:ring-primary focus:border-primary block w-full pl-7 pr-12 py-2 border-gray-300 rounded-md" placeholder="0.00" readonly>
+                                            <div class="absolute inset-y-0 right-0 flex items-center">
+                                                <span class="text-gray-500 sm:text-sm mr-3">USD</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                                        <div class="flex">
+                                            <div class="flex-shrink-0">
+                                                <i class="fas fa-info-circle text-yellow-400"></i>
+                                            </div>
+                                            <div class="ml-3">
+                                                <p class="text-sm text-yellow-700">
+                                                    You'll receive a USSD prompt on your phone to complete the payment. Ensure your Airtel Money account has sufficient funds.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <button type="submit" class="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white airtel-bg hover:bg-red-700">
+                                            <i class="fas fa-mobile-alt mr-2"></i> Complete Payment via USSD
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                            <div class="mt-6">
+                                <div class="relative">
+                                    <div class="absolute inset-0 flex items-center">
+                                        <div class="w-full border-t border-gray-300"></div>
+                                    </div>
+                                    <div class="relative flex justify-center text-sm">
+                                        <span class="px-2 bg-white text-gray-500">Other payment methods</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-6 grid grid-cols-2 gap-3">
+                                    <div>
+                                        <button type="button" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50" id="use-card-payment">
+                                            <i class="far fa-credit-card text-gray-500"></i>
+                                            <span class="ml-2">Credit Card</span>
+                                        </button>
+                                    </div>
+                                    
+                                    <div>
+                                        <button type="button" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50" id="use-paypal-payment">
+                                            <i class="fab fa-paypal text-blue-600"></i>
+                                            <span class="ml-2">PayPal</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Button -->
+    <div class="fixed bottom-6 right-6 z-40">
+        <button class="bg-primary hover:bg-indigo-700 text-white p-4 rounded-full shadow-lg flex items-center" id="open-cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="ml-2 bg-white text-primary rounded-full h-6 w-6 flex items-center justify-center text-sm font-medium" id="cart-count">0</span>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider">Products</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">All Products</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">New Releases</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Bestsellers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider">Affiliates</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">Join Program</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Affiliate Login</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Resources</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider">Company</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">About Us</a></li>
+                        <li><a href="https://wa.me/256778738236" class="text-gray-300 hover:text-white">WhatsApp: 0778738236</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider">Legal</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">Privacy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Terms</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8 flex justify-between items-center">
+                <p class="text-gray-300 text-sm">&copy; 2023 AffiliateBoost. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-300 hover:text-white" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Shopping cart functionality
+        let cart = [];
+        
+        // Open cart modal
+        document.getElementById('open-cart').addEventListener('click', function() {
+            document.getElementById('cart-modal').classList.remove('hidden');
+            updateCartDisplay();
+        });
+        
+        // Close cart modal
+        document.getElementById('close-cart').addEventListener('click', function() {
+            document.getElementById('cart-modal').classList.add('hidden');
+        });
+        
+        document.getElementById('cart-overlay').addEventListener('click', function() {
+            document.getElementById('cart-modal').classList.add('hidden');
+        });
+        
+        // Continue shopping
+        document.getElementById('continue-shopping').addEventListener('click', function() {
+            document.getElementById('cart-modal').classList.add('hidden');
+        });
+        
+        // Add to cart buttons
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.getAttribute('data-product-id');
+                const productName = this.getAttribute('data-product-name');
+                const productPrice = parseFloat(this.getAttribute('data-product-price'));
+                
+                // Check if product already in cart
+                const existingItem = cart.find(item => item.id === productId);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: productId,
+                        name: productName,
+                        price: productPrice,
+                        quantity: 1
+                    });
+                }
+                
+                updateCartCount();
+                
+                // Show a quick confirmation
+                const originalText = this.textContent;
+                this.textContent = 'Added!';
+                this.classList.add('bg-secondary');
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.classList.remove('bg-secondary');
+                }, 1000);
+            });
+        });
+        
+        // Update cart count display
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+        
+        // Update cart display in modal
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<li class="py-6 text-center text-gray-500">Your cart is empty</li>';
+                document.getElementById('checkout-button').classList.add('opacity-50', 'cursor-not-allowed');
+                document.getElementById('checkout-button').setAttribute('disabled', 'disabled');
+            } else {
+                cart.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'flex py-6';
+                    li.innerHTML = `
+                        <div class="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
+                            <img src="https://via.placeholder.com/150" alt="Product image" class="w-full h-full object-center object-cover">
+                        </div>
+                        <div class="ml-4 flex-1 flex flex-col">
+                            <div>
+                                <div class="flex justify-between text-base font-medium text-dark">
+                                    <h3>${item.name}</h3>
+                                    <p class="ml-4">$${(item.price * item.quantity).toFixed(2)}</p>
+                                </div>
+                                <p class="mt-1 text-sm text-gray-500">$${item.price.toFixed(2)} each</p>
+                            </div>
+                            <div class="flex-1 flex items-end justify-between text-sm">
+                                <div class="flex items-center border rounded-md">
+                                    <button class="quantity-minus px-2 py-1 border-r" data-id="${item.id}">-</button>
+                                    <span class="px-4">${item.quantity}</span>
+                                    <button class="quantity-plus px-2 py-1 border-l" data-id="${item.id}">+</button>
+                                </div>
+                                <button type="button" class="font-medium text-primary hover:text-indigo-500 remove-item" data-id="${item.id}">Remove</button>
+                            </div>
+                        </div>
+                    `;
+                    cartItems.appendChild(li);
+                });
+                
+                document.getElementById('checkout-button').classList.remove('opacity-50', 'cursor-not-allowed');
+                document.getElementById('checkout-button').removeAttribute('disabled');
+            }
+            
+            // Update total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+            document.getElementById('checkout-total').textContent = `$${total.toFixed(2)}`;
+            document.getElementById('airtel-payment-amount').value = total.toFixed(2);
+        }
+        
+        // Handle quantity changes and removals
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('quantity-minus')) {
+                const productId = e.target.getAttribute('data-id');
+                const item = cart.find(item => item.id === productId);
+                if (item.quantity > 1) {
+                    item.quantity -= 1;
+                }
+                updateCartDisplay();
+                updateCartCount();
+            }
+            
+            if (e.target.classList.contains('quantity-plus')) {
+                const productId = e.target.getAttribute('data-id');
+                const item = cart.find(item => item.id === productId);
+                item.quantity += 1;
+                updateCartDisplay();
+                updateCartCount();
+            }
+            
+            if (e.target.classList.contains('remove-item')) {
+                const productId = e.target.getAttribute('data-id');
+                cart = cart.filter(item => item.id !== productId);
+                updateCartDisplay();
+                updateCartCount();
+            }
+        });
+        
+        // Checkout flow
+        document.getElementById('checkout-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (cart.length === 0) return;
+            
+            document.getElementById('cart-modal').classList.add('hidden');
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        });
+        
+        // Close checkout modal
+        document.getElementById('close-checkout').addEventListener('click', function() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        });
+        
+        document.getElementById('checkout-overlay').addEventListener('click', function() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        });
+        
+        // Payment form submission
+        document.getElementById('payment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Here you would normally process the payment with a payment processor
+            // For this demo, we'll just show a success message
+            
+            document.getElementById('checkout-modal').classList.add('hidden');
+            document.getElementById('success-modal').classList.remove('hidden');
+            
+            // Clear the cart
+            cart = [];
+            updateCartCount();
+        });
+        
+        // Close success modal
+        document.getElementById('success-close').addEventListener('click', function() {
+            document.getElementById('success-modal').classList.add('hidden');
+        });
+        
+        document.getElementById('success-overlay').addEventListener('click', function() {
+            document.getElementById('success-modal').classList.add('hidden');
+        });
+        
+        // Login/Signup modals
+        document.getElementById('login-btn').addEventListener('click', function() {
+            document.getElementById('affiliate-login-modal').classList.remove('hidden');
+        });
+        
+        document.getElementById('signup-btn').addEventListener('click', function() {
+            document.getElementById('affiliate-signup-modal').classList.remove('hidden');
+        });
+        
+        document.getElementById('mobile-login-btn').addEventListener('click', function() {
+            document.getElementById('affiliate-login-modal').classList.remove('hidden');
+        });
+        
+        document.getElementById('mobile-signup-btn').addEventListener('click', function() {
+            document.getElementById('affiliate-signup-modal').classList.remove('hidden');
+        });
+
+        // Affiliate login modal
+        document.getElementById('affiliate-login-btn').addEventListener('click', function() {
+            document.getElementById('affiliate-login-modal').classList.remove('hidden');
+        });
+        
+        document.getElementById('mobile-affiliate-login-btn').addEventListener('click', function() {
+            document.getElementById('affiliate-login-modal').classList.remove('hidden');
+        });
+        
+        document.getElementById('close-affiliate-login').addEventListener('click', function() {
+            document.getElementById('affiliate-login-modal').classList.add('hidden');
+        });
+        
+        document.getElementById('affiliate-login-overlay').addEventListener('click', function() {
+            document.getElementById('affiliate-login-modal').classList.add('hidden');
+        });
+        
+        // Affiliate signup modal
+        document.getElementById('join-now-btn').addEventListener('click', function() {
+            document.getElementById('affiliate-signup-modal').classList.remove('hidden');
+        });
+        
+        document.getElementById('close-affiliate-signup').addEventListener('click', function() {
+            document.getElementById('affiliate-signup-modal').classList.add('hidden');
+        });
+        
+        document.getElementById('affiliate-signup-overlay').addEventListener('click', function() {
+            document.getElementById('affiliate-signup-modal').classList.add('hidden');
+        });
+        
+        // Toggle between login and signup
+        document.getElementById('show-affiliate-signup').addEventListener('click', function() {
+            document.getElementById('affiliate-login-modal').classList.add('hidden');
+            document.getElementById('affiliate-signup-modal').classList.remove('hidden');
+        });
+        
+        document.getElementById('show-affiliate-login').addEventListener('click', function() {
+            document.getElementById('affiliate-signup-modal').classList.add('hidden');
+            document.getElementById('affiliate-login-modal').classList.remove('hidden');
+        });
+        
+        // Show Airtel Money fields when selected
+        document.querySelectorAll('input[name="payment-method"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'airtel-money') {
+                    document.getElementById('airtel-fields').classList.remove('hidden');
+                } else {
+                    document.getElementById('airtel-fields').classList.add('hidden');
+                }
+            });
+        });
+        
+        // Affiliate signup form submission
+        document.getElementById('affiliate-signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Here you would normally process the signup
+            // For this demo, we'll just close the modal
+            document.getElementById('affiliate-signup-modal').classList.add('hidden');
+            
+            // Show success message
+            alert('Thank you for joining our affiliate program! You will receive an email with further instructions.');
+        });
+        
+// Airtel payment modal
+document.getElementById('airtel-payment-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const phone = document.getElementById('airtel-payment-phone').value;
+    if (phone && phone.length >= 10) {
+        // In a real implementation, you would call your backend API here
+        console.log(`Initiating Airtel Money payment to ${phone} for ${document.getElementById('airtel-payment-amount').value}`);
+        
+        // Show success after 3 seconds (simulating payment processing)
+        setTimeout(() => {
+            document.getElementById('airtel-payment-modal').classList.add('hidden');
+            document.getElementById('success-modal').classList.remove('hidden');
+            
+            // Clear the cart
+            cart = [];
+            updateCartCount();
+        }, 3000);
+    } else {
+        alert('Please enter a valid Airtel Money phone number');
+    }
+});
+        
+        document.getElementById('close-airtel-payment').addEventListener('click', function() {
+            document.getElementById('airtel-payment-modal').classList.add('hidden');
+        });
+        
+        document.getElementById('airtel-payment-overlay').addEventListener('click', function() {
+            document.getElementById('airtel-payment-modal').classList.add('hidden');
+        });
+        
+        // Airtel payment form submission
+        document.getElementById('airtel-payment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const phone = document.getElementById('airtel-payment-phone').value;
+            if (phone && phone.length >= 10) {
+                // In a real implementation, you would call your backend API here
+                console.log(`Initiating Airtel Money payment to ${phone} for ${document.getElementById('airtel-payment-amount').value}`);
+                
+                // Show success after 3 seconds (simulating payment processing)
+                setTimeout(() => {
+                    document.getElementById('airtel-payment-modal').classList.add('hidden');
+                    document.getElementById('success-modal').classList.remove('hidden');
+                    
+                    // Clear the cart
+                    cart = [];
+                    updateCartCount();
+                }, 3000);
+            } else {
+                alert('Please enter a valid Airtel Money phone number');
+            }
+        });
+        
+        // Switch to card payment from Airtel modal
+        document.getElementById('use-card-payment').addEventListener('click', function() {
+            document.getElementById('airtel-payment-modal').classList.add('hidden');
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        });
+        
+        // Switch to PayPal payment from Airtel modal
+        document.getElementById('use-paypal-payment').addEventListener('click', function() {
+            document.getElementById('airtel-payment-modal').classList.add('hidden');
+            // Here you would normally redirect to PayPal
+            // For this demo, we'll just show a success message
+            document.getElementById('success-modal').classList.remove('hidden');
+            
+            // Clear the cart
+            cart = [];
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>
